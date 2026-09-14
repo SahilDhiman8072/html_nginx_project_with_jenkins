@@ -11,5 +11,10 @@ pipeline{
                 sh 'docker build -t nginx_static_pro .'
             }
         }
+        stage("tag image"){
+            steps{
+                sh 'docker tag nginx_static_pro:latest sahild42770/nginx_html_jenkins:latest'
+            }
+        }
     }
 }
