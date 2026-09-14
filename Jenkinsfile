@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage("pull code from github"){
             steps{
-                git branch:'main',git url:'https://github.com/SahilDhiman8072/html_nginx_project_with_jenkins.git'
+                git branch:'main',url:'https://github.com/SahilDhiman8072/html_nginx_project_with_jenkins.git'
             }
         }
         stage("build image"){
