@@ -3,17 +3,12 @@ pipeline{
     stages{
         stage("pull code from github"){
             steps{
-                git branch:'',git url:''
+                git branch:'main',git url:'https://github.com/SahilDhiman8072/html_nginx_project_with_jenkins.git'
             }
         }
         stage("build image"){
             steps{
-                sh 'docker build -t nginx_static .'
-            }
-        }
-        stage("push to docker hub"){
-            steps{
-                sh 'docker tag nginx_static '
+                sh 'docker build -t nginx_static_pro .'
             }
         }
     }
