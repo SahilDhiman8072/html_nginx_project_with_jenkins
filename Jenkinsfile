@@ -26,5 +26,10 @@ pipeline{
                 }
             }
         }
+        stage("push to dockerhub"){
+            steps{
+                sh'docker push sahild42770/nginx_html_jenkins:latest'
+            }
+        }
     }
 }
