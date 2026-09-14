@@ -10,10 +10,20 @@ pipeline{
             steps{
                 sh 'docker build -t nginx_static_pro .'
             }
+            post{
+                success{
+                    sh 'docker images'
+                }
+            }
         }
         stage("tag image"){
             steps{
                 sh 'docker tag nginx_static_pro:latest sahild42770/nginx_html_jenkins:latest'
+            }
+            post{
+                success{
+                    sh 'docker images'
+                }
             }
         }
     }
