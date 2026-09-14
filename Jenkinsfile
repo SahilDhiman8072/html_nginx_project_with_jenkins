@@ -27,8 +27,10 @@ pipeline{
             }
         }
         stage("push to dockerhub"){
-            steps{
+            sshagent(['dockerhub-up']){
+                steps{
                 sh'docker push sahild42770/nginx_html_jenkins:latest'
+            }
             }
         }
     }
