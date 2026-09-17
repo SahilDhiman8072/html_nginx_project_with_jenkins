@@ -1,5 +1,8 @@
 pipeline{
     agent any
+    environment{
+        IMAGE_NAME= "sahild42770/nginx_html_jenkins"
+    }
     stages{
         stage("pull code from github"){
             steps{
@@ -8,17 +11,7 @@ pipeline{
         }
         stage("build image"){
             steps{
-                sh 'docker build -t nginx_static_pro .'
-            }
-            post{
-                success{
-                    sh 'docker images'
-                }
-            }
-        }
-        stage("tag image"){
-            steps{
-                sh 'docker tag nginx_static_pro:latest sahild42770/nginx_html_jenkins:latest'
+                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
             }
             post{
                 success{
@@ -28,9 +21,21 @@ pipeline{
         }
         stage("push to dockerhub"){
             steps{
-            sshagent(['dockerhub-up']){               
-                sh'docker push sahild42770/nginx_html_jenkins:latest'
+            credentials([
+                usernamePassword(
+                    credentialsId:'dockerhub-up',
+                    usernameVariable: 'dockerusername',
+                    passwordVariable: 'dockerpass'
+                )
+            ])
+            sh 'echo "$dockerpass" | docker login -u "$dockerusername" --password-stdin' 
             }
+        }
+        stage("run container"){
+            steps{
+                sh """
+                docker run -d -p 80:80 --name nginx_cont $IMAGE_NAME:$BUILD_NUMBER
+                """
             }
         }
     }
