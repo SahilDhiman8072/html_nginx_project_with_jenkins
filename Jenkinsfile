@@ -25,7 +25,7 @@ pipeline{
                     usernamePassword(
                         credentialsId:'dockerhub-up',
                         usernameVariable:'dockeruser',
-                        passwordVarible:'dockerpass'
+                        passwordVariable:'dockerpass'
                     )
                 ]){
                 sh 'echo "$dockerpass" | docker login -u "$dockeruser" --passwd-stdin'
