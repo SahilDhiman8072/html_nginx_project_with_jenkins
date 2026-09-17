@@ -27,8 +27,9 @@ pipeline{
                         usernameVariable:'dockeruser',
                         passwordVarible:'dockerpass'
                     )
-                ])
+                ]){
                 sh 'echo "$dockerpass | docker login -u "$dockeruser" --passwd-stdin'
+                }
             }
         }
         stage("push to docker hub"){
