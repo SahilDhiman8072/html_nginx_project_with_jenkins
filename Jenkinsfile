@@ -11,7 +11,7 @@ pipeline{
         }
         stage("build image"){
             steps{
-                sh 'docker build -t $image_name:$BUILD_NUMBER'
+                sh 'docker build -t $image_name:$BUILD_NUMBER .'
             }
             post{
                 success{
