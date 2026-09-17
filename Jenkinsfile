@@ -21,7 +21,7 @@ pipeline{
         }
         stage("push to dockerhub"){
             steps{
-            credentials([
+            withCredentials([
                 usernamePassword(
                     credentialsId:'dockerhub-up',
                     usernameVariable: 'dockerusername',
