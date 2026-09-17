@@ -28,7 +28,11 @@ pipeline{
                         passwordVarible:'dockerpass'
                     )
                 ]){
+<<<<<<< HEAD
                 sh 'echo "$dockerpass" | docker login -u "$dockeruser" --passwd-stdin'
+=======
+                sh 'echo "$dockerpass | docker login -u "$dockeruser" --passwd-stdin'
+>>>>>>> d2e8fb16921ffa5d6cd054b71972b647d085e06b
                 }
             }
         }
