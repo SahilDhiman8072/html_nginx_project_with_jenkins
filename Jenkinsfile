@@ -35,8 +35,14 @@ pipeline{
         stage("run container"){
             steps{
                 sh """
+                docker rm -f nginx_cont
                 docker run -d -p 80:80 --name nginx_cont $IMAGE_NAME:$BUILD_NUMBER
                 """
+            }
+            post{
+                success{
+                    sh 'docker ps'
+                }
             }
         }
     }
