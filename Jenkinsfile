@@ -41,7 +41,7 @@ pipeline{
             }
             post{
                 success{
-                    sh 'docker ps'
+                    sh 'docker ps '
                 }
             }
         }
