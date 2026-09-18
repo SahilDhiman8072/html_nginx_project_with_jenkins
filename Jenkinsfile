@@ -40,12 +40,12 @@ pipeline{
         }
         stage("run container"){
             steps{
-                sh 'docker rm -f nginx_cont'
-                sh 'docker run -d --name nginx_cont -p 80:80 $image_name:$BUILD_NUMBER'
+                sh 'docker compose down || true'
+                sh 'docker compose up -d'
             }
             post{
                success{
-                sh 'docker ps'
+                sh 'docker compose ps'
                } 
             }
         }
