@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  myweb:
+    build: .
+    image: sahild42770/nginx_html_jenkins:latest
+    container_name: nginx_static
+    ports:
+      - "80:80"

@@ -11,7 +11,7 @@ pipeline{
         }
         stage("build image"){
             steps{
-                sh 'docker build -t $image_name:$BUILD_NUMBER .'
+                sh 'docker compose build'
             }
             post{
                 success{
@@ -34,6 +34,7 @@ pipeline{
         }
         stage("push to docker hub"){
             steps{
+                sh 'docker tag $image_name $image_name:$BUILD_NUMBER'
                 sh 'docker push $image_name:$BUILD_NUMBER'
             }
         }
